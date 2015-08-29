@@ -2,13 +2,13 @@
   "name": "Remember",
   "icons": [
     {
-      "src": "/icons/ic_directions_walk_black_24dp_1x.png",
+      "src": "./icons/ic_directions_walk_black_24dp_1x.png",
       "sizes": "24,24",
       "type": "image/png",
       "density": "0.5"
     },
     {
-      "src": "/icons/ic_directions_walk_black_24dp_2x.png",
+      "src": "./icons/ic_directions_walk_black_24dp_2x.png",
       "sizes": "48x48",
       "type": "image/png",
       "density": "1.0"
