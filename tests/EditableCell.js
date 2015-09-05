@@ -18,7 +18,7 @@ test("EditableCell test", function (assert) {
 test("EditableCell adding test", function (assert) {
 	let component = createComponent(EditableCell, { adding: true, confirm: ()=>{} });
 	assert.equal(component.type,"td","should return a table cell");
-	assert.equal(component._store.props.children[0].type,"input","should allow input");
+	assert.equal(component._store.props.children[0]._store.props.children[0].type,"input","should allow input");
 	assert.equal(component._store.props.children.filter(d=>d.type==="i").length,2,"should have 2 icons");
 	assert.end();
 });

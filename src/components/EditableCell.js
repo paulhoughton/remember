@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from "react";
+const  mdl = (typeof window !== 'undefined') && require("exports?componentHandler!material-design-lite/material");
 
 class EditableCell extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {editing: false};
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if (mdl) mdl.upgradeDom();
+		if (this.state.editing && prevState.editing!=this.state.editing) {
+			this.refs.newDesc.getDOMNode().focus();
+		}
 	}
 	setEdit(status){
 		this.setState({editing:status});
@@ -24,11 +31,15 @@ class EditableCell extends Component {
 
 		if (this.props.adding){
 			return (
-				<td className="mdl-data-table__cell--non-numeric">
-					<input autoFocus={true}
-						onKeyDown={this.checkSubmit.bind(this)}
-						ref="newDesc"
-						style={{width:"calc(100% - 48px)", maxWidth:"300px"}}/>
+				<td className="mdl-data-table__cell--non-numeric" colSpan={3}>
+					<div className="mdl-textfield mdl-js-textfield" style={{width:"calc(100% - 48px)"}}>
+						<input autoFocus={true}
+							className="mdl-textfield__input"
+							onKeyDown={this.checkSubmit.bind(this)}
+							ref="newDesc"
+							style={{display:"inline-block"}}/>
+						<label className="mdl-textfield__label">Location...</label>
+					</div>
 					<i className="material-icons" onClick={this.confirmLocation.bind(this)}>check_circle</i>
 					<i className="material-icons" onClick={this.props.cancel}>cancel</i>
 				</td>
@@ -37,23 +48,25 @@ class EditableCell extends Component {
 
 		if (this.state.editing){
 			return (<td className="mdl-data-table__cell--non-numeric">
-					<input autoFocus={true}
-						defaultValue={this.props.value} 
-						onKeyDown={this.checkSubmit.bind(this)}
-						ref="newDesc" 
-						style={{width:"calc(100% - 72px)", maxWidth:"300px"}} />
+				<div className="mdl-textfield mdl-js-textfield"
+				style={{width:"calc(100% - 72px)"}}>
+					<input className="mdl-textfield__input"
+							defaultValue={this.props.value}
+							onKeyDown={this.checkSubmit.bind(this)}
+							ref="newDesc"
+							style={{display:"inline-block"}}/>
+					<label className="mdl-textfield__label">Location...</label>
+					</div>
 						<i className="material-icons" onClick={this.confirmLocation.bind(this)}>check_circle</i>
 						<i className="material-icons" onClick={this.setEdit.bind(this,false)}>cancel</i>
 						<i className="material-icons" onClick={this.deleteLocation.bind(this)}>delete</i>
 					</td>);
 
 		}
-		else
-		{
-			return (<td className="mdl-data-table__cell--non-numeric" onClick={this.setEdit.bind(this, true)}>
-						{this.props.value}
-					</td>);
-		}		
+		return (<td className="mdl-data-table__cell--non-numeric"
+						onClick={this.setEdit.bind(this, true)}>
+					{this.props.value}
+				</td>);
 	}
 }
 EditableCell.propTypes = {

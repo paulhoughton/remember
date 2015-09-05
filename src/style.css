@@ -41,9 +41,20 @@
   bottom:10px;
   z-index:5;
 }
+.mdl-data-table.mdl-js-data-table td {
+  vertical-align: middle;
+}
 @media (max-height: 400px) {
   .remember-add-button {
     bottom:auto;
     color:#ffffff;
+  }
+}
+@media (max-width: 400px) {
+  .mdl-data-table thead{
+    display: none;
+  }
+  .mdl-data-table.mdl-js-data-table td, .mdl-data-table.mdl-js-data-table th {
+    padding:0;
   }
 }

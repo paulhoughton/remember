@@ -15,13 +15,13 @@ class Table extends Component {
 
 				distByRow.push(dist);
 
-				return (<TableRow 
+				return (<TableRow
 					confirm={this.props.addLocation}
 					deleteRow={this.props.deleteLocation.bind(this, i)}
 					desc={desc}
 					detailed={this.props.detailed}
 					dist={dist}
-					geo={this.props.geo} 
+					geo={this.props.geo}
 					key={i}
 					lat={lat}
 					lon={lon}
@@ -32,17 +32,17 @@ class Table extends Component {
 
 			if (this.props.newLocation)
 			{
-				rows.unshift(<TableRow 
-								adding={true} 
+				rows.unshift(<TableRow
+								adding={true}
 								cancel={this.props.showNewItem.bind(this,false)}
-								confirm={this.props.addLocation} 
+								confirm={this.props.addLocation}
 								key={-1} />);
 			}
 
 		}
 
 		return (<div>
-				<table 
+				<table
 					className="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
 					style={{width:"100%"}}>
 					<thead>

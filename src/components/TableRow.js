@@ -17,12 +17,10 @@ class TableRow extends Component {
 
 		if (this.props.adding){
 			return(<tr>
-					<EditableCell  
+					<EditableCell
 						adding={true}
-						cancel={this.props.cancel} 
+						cancel={this.props.cancel}
 						confirm={this.props.confirm} />
-					<td style={centerText}><i className="material-icons">star</i></td>
-					<td>0</td>
 				</tr>);
 		}
 
@@ -38,11 +36,11 @@ class TableRow extends Component {
 					<i className="material-icons" style={cssRotation(orient, this.props)}>navigation</i>;
 
 		return(<tr>
-				<EditableCell  
+				<EditableCell
 					confirm={this.updateLocation.bind(this)}
-					deleteRow={this.props.deleteRow} 
+					deleteRow={this.props.deleteRow}
 					row={this.props.row}
-					value={this.props.desc}/> 
+					value={this.props.desc}/>
 				<td style={centerText}>{icon}</td>
 				<td>{helpers.round(this.props.dist, this.props.detailed?3:1)}</td>
 			</tr>
