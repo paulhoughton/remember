@@ -44,21 +44,22 @@ class App extends Component {
 		}
 		else
 		{
-			main = (<Table 
+			main = (<Table
 							addLocation = {this.addLocation.bind(this)}
 							data = {this.props.data}
 							deleteLocation = {this.props.deleteLocation}
 							detailed = {this.state.detailed}
 							geo = {this.props.geo}
 							newLocation = {this.state.newLocation}
-							showNewItem = {this.showNewItem.bind(this)} />
+							showNewItem = {this.showNewItem.bind(this)}
+							updateDescription={this.props.updateDescription} />
 					);
 		}
 		if (!this.state.newLocation && this.state.show!=="about")
 		{
 			if (this.state.detailed) {
-				var txt=`${helpers.round(this.props.geo.lat,3)}, 
-					${helpers.round(this.props.geo.lon,3)} 
+				var txt=`${helpers.round(this.props.geo.lat,3)},
+					${helpers.round(this.props.geo.lon,3)}
 					(${this.props.geo.orientation||0}°)`;
 			}
 			button=<AddButton add={this.showNewItem.bind(this,true)} additionalText={txt} geo={this.props.geo} />
@@ -67,22 +68,22 @@ class App extends Component {
 		let warnings=[];
 
 		if (this.props.geo.orientation===undefined){
-						warnings.push(<i className="material-icons" 
+						warnings.push(<i className="material-icons"
 											key={"noOrientation"}
-											onClick={this.warningMessage.bind(this, "Orientation unavailable" )} 
+											onClick={this.warningMessage.bind(this, "Orientation unavailable" )}
 											style={{"color":"white"}}
 											title="Orientation unavailable">navigation</i>);
 					}
 		if (this.props.geo.accuracy>100) {
-			warnings.push(<i className="material-icons" 
+			warnings.push(<i className="material-icons"
 											key={"locationInaccurate"}
-											onClick={this.warningMessage.bind(this, `Inaccurate location: ${this.props.geo.accuracy}m` )} 
+											onClick={this.warningMessage.bind(this, `Inaccurate location: ${this.props.geo.accuracy}m` )}
 											title="Inaccurate location">error</i>);
 		}
 		if (this.props.geo.lastUpdate && new Date()-this.props.geo.lastUpdate>30000) {
-			warnings.push(<i className="material-icons" 
-											key={"locationSlow"} 
-											onClick={this.warningMessage.bind(this, `Out of date location: ${Math.floor((new Date()-this.props.geo.lastUpdate)/1000)}s` )} 
+			warnings.push(<i className="material-icons"
+											key={"locationSlow"}
+											onClick={this.warningMessage.bind(this, `Out of date location: ${Math.floor((new Date()-this.props.geo.lastUpdate)/1000)}s` )}
 											title="Out of date location">location_searching</i>);
 		}
 
@@ -104,7 +105,7 @@ class App extends Component {
 								</a>
 								<a className="mdl-navigation__link" href="#">
 								<i className="material-icons">bug_report</i>Detailed
-										<label className="mdl-switch mdl-js-switch mdl-js-ripple-effect" 
+										<label className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
 											htmlFor="switch-detail"
 											style={{marginLeft:"10px",width:"auto"}}>
 										<input checked={this.state.detailed} className="mdl-switch__input" id="switch-detail" onChange={this.toggleDetail.bind(this)} type="checkbox"/>

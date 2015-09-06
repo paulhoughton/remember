@@ -3,9 +3,6 @@ import EditableCell from "./EditableCell";
 import helpers from "../helpers";
 
 class TableRow extends Component {
-	updateLocation(d){
-		this.props.confirm(d, this.props.lat, this.props.lon);
-	}
 	render() {
 		const centerText={textAlign: "center"};
 
@@ -37,7 +34,7 @@ class TableRow extends Component {
 
 		return(<tr>
 				<EditableCell
-					confirm={this.updateLocation.bind(this)}
+					confirm={this.props.updateDescription}
 					deleteRow={this.props.deleteRow}
 					row={this.props.row}
 					value={this.props.desc}/>

@@ -25,7 +25,8 @@ class Table extends Component {
 					key={i}
 					lat={lat}
 					lon={lon}
-					row={i} />);
+					row={i}
+					updateDescription={this.props.updateDescription} />);
 			});
 
 			rows.sort((a,b)=>distByRow[a.key]>distByRow[b.key]);

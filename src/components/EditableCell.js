@@ -16,8 +16,7 @@ class EditableCell extends Component {
 		this.setState({editing:status});
 	}
 	confirmLocation(){
-		if (this.state.editing) this.props.deleteRow(this.props.row);
-		this.props.confirm(this.refs.newDesc.getDOMNode().value);
+		this.props.confirm(this.refs.newDesc.getDOMNode().value, this.props.row);
 		this.setEdit(false);
 	}
 	deleteLocation(){
