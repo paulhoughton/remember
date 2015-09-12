@@ -19,14 +19,14 @@ export default class EditableCell extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (mdl) mdl.upgradeDom();
 		if (this.state.editing && prevState.editing!=this.state.editing) {
-			this.refs.newDesc.getDOMNode().focus();
+			this.refs.newDesc.focus();
 		}
 	}
 	setEdit(status){
 		this.setState({editing:status});
 	}
 	confirmLocation(){
-		this.props.confirm(this.refs.newDesc.getDOMNode().value, this.props.row);
+		this.props.confirm(this.refs.newDesc.value, this.props.row);
 		this.setEdit(false);
 	}
 	deleteLocation(){
