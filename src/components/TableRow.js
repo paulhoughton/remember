@@ -2,13 +2,28 @@ import React, { Component, PropTypes } from "react";
 import EditableCell from "./EditableCell";
 import helpers from "../helpers";
 
-class TableRow extends Component {
+export default class TableRow extends Component {
+
+	static propTypes = {
+		adding: PropTypes.bool,
+		cancel: PropTypes.func,
+		confirm: PropTypes.func.isRequired,
+		deleteRow: PropTypes.func,
+		desc: PropTypes.string,
+		detailed: PropTypes.bool,
+		dist: PropTypes.number,
+		geo: PropTypes.object,
+		lat: PropTypes.number,
+		lon: PropTypes.number,
+		row: PropTypes.number
+	};
+
 	render() {
 		const centerText={textAlign: "center"};
 
 		function cssRotation(deg) {
 			return {
-				transform:"rotate("+ Math.floor(deg)+ "deg)"
+				transform:`rotate(${Math.floor(deg)}deg)`
 			};
 		}
 
@@ -30,7 +45,7 @@ class TableRow extends Component {
 
 		let icon = this.props.dist<0.02?
 					<i className="material-icons">star</i>:
-					<i className="material-icons" style={cssRotation(orient, this.props)}>navigation</i>;
+					<i className="material-icons" style={cssRotation(orient)}>navigation</i>;
 
 		return(<tr>
 				<EditableCell
@@ -44,20 +59,3 @@ class TableRow extends Component {
 		);
 	}
 }
-
-
-TableRow.propTypes = {
-	adding: PropTypes.bool,
-	cancel: PropTypes.func,
-	confirm: PropTypes.func,
-	deleteRow: PropTypes.func,
-	desc: PropTypes.string,
-	detailed: PropTypes.bool,
-	dist: PropTypes.number,
-	geo: PropTypes.object,
-	lat: PropTypes.number,
-	lon: PropTypes.number,
-	row: PropTypes.number
-};
-
-export default TableRow;

@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from "react";
 
-class About extends Component {
+export default class About extends Component {
+	
+	static propTypes = {
+		ok: PropTypes.func.isRequired
+	};
+	
 	render() {
-
 		const center = {
 			position: "absolute",
 			top: "30%",
@@ -10,7 +14,6 @@ class About extends Component {
 			margin: "0 0 0 -165px",
 			textAlign: "center"
 		};
-
 		return (
 			<section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 				<div className="mdl-card mdl-shadow--2dp" style={center}>
@@ -32,8 +35,4 @@ class About extends Component {
 		);
 	}
 }
-About.propTypes = {
-	ok: PropTypes.func.isRequired
-};
 
-export default About;

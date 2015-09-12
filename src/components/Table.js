@@ -2,7 +2,18 @@ import React, { Component, PropTypes } from "react";
 import TableRow from "./TableRow";
 import helpers from "../helpers";
 
-class Table extends Component {
+export default class Table extends Component {
+
+	static propTypes = {
+		addLocation: PropTypes.func.isRequired,
+		data: PropTypes.array,
+		deleteLocation: PropTypes.func.isRequired,
+		detailed: PropTypes.bool,
+		geo: PropTypes.object,
+		newLocation: PropTypes.bool,
+		showNewItem: PropTypes.func
+	};
+
 	render() {
 		let distByRow=[];
 
@@ -60,15 +71,3 @@ class Table extends Component {
 				</div>);
 	}
 }
-
-Table.propTypes = {
-	addLocation: PropTypes.func.isRequired,
-	data: PropTypes.array,
-	deleteLocation: PropTypes.func.isRequired,
-	detailed: PropTypes.bool,
-	geo: PropTypes.object,
-	newLocation: PropTypes.bool,
-	showNewItem: PropTypes.func
-};
-
-export default Table;

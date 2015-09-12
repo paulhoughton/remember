@@ -5,7 +5,15 @@ import AddButton from "./AddButton";
 import Table from "./Table";
 import helpers from "../helpers";
 
-class App extends Component {
+export default class App extends Component {
+
+	static propTypes ={
+		addLocation: PropTypes.func.isRequired,
+		data: PropTypes.array.isRequired,
+		deleteLocation: PropTypes.func.isRequired,
+		geo: PropTypes.object.isRequired
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {detailed: false, newLocation:false};
@@ -45,13 +53,13 @@ class App extends Component {
 		else
 		{
 			main = (<Table
-							addLocation = {this.addLocation.bind(this)}
+							addLocation = {::this.addLocation}
 							data = {this.props.data}
 							deleteLocation = {this.props.deleteLocation}
 							detailed = {this.state.detailed}
 							geo = {this.props.geo}
 							newLocation = {this.state.newLocation}
-							showNewItem = {this.showNewItem.bind(this)}
+							showNewItem = {::this.showNewItem}
 							updateDescription={this.props.updateDescription} />
 					);
 		}
@@ -108,7 +116,10 @@ class App extends Component {
 										<label className="mdl-switch mdl-js-switch mdl-js-ripple-effect"
 											htmlFor="switch-detail"
 											style={{marginLeft:"10px",width:"auto"}}>
-										<input checked={this.state.detailed} className="mdl-switch__input" id="switch-detail" onChange={this.toggleDetail.bind(this)} type="checkbox"/>
+										<input checked={this.state.detailed}
+											className="mdl-switch__input"
+											id="switch-detail"
+											onChange={::this.toggleDetail} type="checkbox"/>
 										<span className="mdl-switch__label"></span>
 								</label>
 								</a>
@@ -122,10 +133,3 @@ class App extends Component {
 	}
 
 }
-App.propTypes ={
-	addLocation: PropTypes.func.isRequired,
-	data: PropTypes.array.isRequired,
-	deleteLocation: PropTypes.func.isRequired,
-	geo: PropTypes.object.isRequired
-};
-export default App;

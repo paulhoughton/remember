@@ -1,7 +1,17 @@
 import React, { Component, PropTypes } from "react";
 const  mdl = (typeof window !== 'undefined') && require("exports?componentHandler!material-design-lite/material");
 
-class EditableCell extends Component {
+export default class EditableCell extends Component {
+
+	static propTypes = {
+		adding: PropTypes.bool,
+		cancel: PropTypes.func,
+		confirm: PropTypes.func.isRequired,
+		deleteRow: PropTypes.func,
+		row: PropTypes.number,
+		value: PropTypes.string
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {editing: false};
@@ -34,12 +44,12 @@ class EditableCell extends Component {
 					<div className="mdl-textfield mdl-js-textfield" style={{width:"calc(100% - 48px)"}}>
 						<input autoFocus={true}
 							className="mdl-textfield__input"
-							onKeyDown={this.checkSubmit.bind(this)}
+							onKeyDown={::this.checkSubmit}
 							ref="newDesc"
 							style={{display:"inline-block"}}/>
 						<label className="mdl-textfield__label">Location...</label>
 					</div>
-					<i className="material-icons" onClick={this.confirmLocation.bind(this)}>check_circle</i>
+					<i className="material-icons" onClick={::this.confirmLocation}>check_circle</i>
 					<i className="material-icons" onClick={this.props.cancel}>cancel</i>
 				</td>
 			);
@@ -51,14 +61,14 @@ class EditableCell extends Component {
 				style={{width:"calc(100% - 72px)"}}>
 					<input className="mdl-textfield__input"
 							defaultValue={this.props.value}
-							onKeyDown={this.checkSubmit.bind(this)}
+							onKeyDown={::this.checkSubmit}
 							ref="newDesc"
 							style={{display:"inline-block"}}/>
 					<label className="mdl-textfield__label">Location...</label>
 					</div>
-						<i className="material-icons" onClick={this.confirmLocation.bind(this)}>check_circle</i>
+						<i className="material-icons" onClick={::this.confirmLocation}>check_circle</i>
 						<i className="material-icons" onClick={this.setEdit.bind(this,false)}>cancel</i>
-						<i className="material-icons" onClick={this.deleteLocation.bind(this)}>delete</i>
+						<i className="material-icons" onClick={::this.deleteLocation}>delete</i>
 					</td>);
 
 		}
@@ -68,12 +78,3 @@ class EditableCell extends Component {
 				</td>);
 	}
 }
-EditableCell.propTypes = {
-	adding: PropTypes.bool,
-	cancel: PropTypes.func,
-	confirm: PropTypes.func.isRequired,
-	deleteRow: PropTypes.func,
-	row: PropTypes.number,
-	value: PropTypes.string
-};
-export default EditableCell;

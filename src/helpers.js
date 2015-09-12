@@ -33,7 +33,7 @@ function getDegrees(startLat,startLong,endLat,endLong){
 	return (degrees(Math.atan2(dLong, dPhi)) + 360.0) % 360.0;
 }
 
-module.exports = {degrees,
+export default {degrees,
 	radians,
 	round,
 	getDegrees,

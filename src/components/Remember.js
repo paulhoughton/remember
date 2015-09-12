@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import App from './App.js';
 import helpers from '../helpers.js';
 
-class Remember extends Component {
+export default class Remember extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,11 +15,11 @@ class Remember extends Component {
 
 	render() {
 		return   <App
-			      	addLocation = {this.addLocation.bind(this)}
+			      	addLocation = {::this.addLocation}
 			      	data = {this.state.data}
-			      	deleteLocation = {this.deleteLocation.bind(this)}
+			      	deleteLocation = {::this.deleteLocation}
 			      	geo = {this.state.geo}
-					updateDescription = {this.updateDescription.bind(this)}/> ;
+					updateDescription = {::this.updateDescription}/> ;
 	}
 
 	componentDidUpdate(newProps, newState){
@@ -77,4 +77,3 @@ class Remember extends Component {
 	}
 }
 
-export default Remember;
