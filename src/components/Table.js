@@ -19,8 +19,7 @@ export default class Table extends Component {
 
 		let rows;
 		if (this.props.geo.lat){
-			rows=this.props.data.map((d, i) => {
-				let [lat, lon, desc] =d;
+			rows=this.props.data.map(([lat, lon, desc], i) => {
 
 				let dist=helpers.getDistanceFromLatLonInKm(lat,lon,this.props.geo.lat,this.props.geo.lon);
 

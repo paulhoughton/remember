@@ -19,14 +19,6 @@ export default class TableRow extends Component {
 	};
 
 	render() {
-		const centerText={textAlign: "center"};
-
-		function cssRotation(deg) {
-			return {
-				transform:`rotate(${Math.floor(deg)}deg)`
-			};
-		}
-
 		if (this.props.adding){
 			return(<tr>
 					<EditableCell
@@ -41,11 +33,11 @@ export default class TableRow extends Component {
 									this.props.lat,
 									this.props.lon);
 
-		let orient=360-(720-this.props.geo.orientation-deg)%360;
+		let orient=360-(720-(this.props.geo.orientation||0)-deg)%360;
 
 		let icon = this.props.dist<0.02?
 					<i className="material-icons">star</i>:
-					<i className="material-icons" style={cssRotation(orient)}>navigation</i>;
+					<i className="material-icons" style={{transform:`rotate(${Math.floor(orient)}deg)`}}>navigation</i>;
 
 		return(<tr>
 				<EditableCell
@@ -53,7 +45,7 @@ export default class TableRow extends Component {
 					deleteRow={this.props.deleteRow}
 					row={this.props.row}
 					value={this.props.desc}/>
-				<td style={centerText}>{icon}</td>
+				<td style={{textAlign: "center"}}>{icon}</td>
 				<td>{helpers.round(this.props.dist, this.props.detailed?3:1)}</td>
 			</tr>
 		);
