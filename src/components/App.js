@@ -4,6 +4,7 @@ import About from "./About";
 import AddButton from "./AddButton";
 import Table from "./Table";
 import helpers from "../helpers";
+import {VERSION, DEMO_DATA} from "../constants";
 
 export default class App extends Component {
 
@@ -47,23 +48,37 @@ export default class App extends Component {
 	render() {
 		let main;
 		let button;
-		if (this.state.show==="about"){
-			main = <About ok={this.showPage.bind(this, "main")} />;
-		}
-		else
-		{
+		let showAddButton=false;
+
+		switch (this.state.show) {
+		case "about":
+			main = <About ok={this.showPage.bind(this, "main")} version={VERSION} />;
+			break;
+		case "demo":
 			main = (<Table
-							addLocation = {::this.addLocation}
-							data = {this.props.data}
-							deleteLocation = {this.props.deleteLocation}
-							detailed = {this.state.detailed}
-							geo = {this.props.geo}
-							newLocation = {this.state.newLocation}
-							showNewItem = {::this.showNewItem}
-							updateDescription={this.props.updateDescription} />
+						addLocation = {()=>{}}
+						data = {DEMO_DATA}
+						deleteLocation = {()=>{}}
+						detailed = {this.state.detailed}
+						geo = {this.props.geo}
+						newLocation = {false}
+						updateDescription={this.props.updateDescription} />
+					);
+			break;
+		default:
+			showAddButton=true;
+			main = (<Table
+						addLocation = {::this.addLocation}
+						data = {this.props.data}
+						deleteLocation = {this.props.deleteLocation}
+						detailed = {this.state.detailed}
+						geo = {this.props.geo}
+						newLocation = {this.state.newLocation}
+						showNewItem = {::this.showNewItem}
+						updateDescription={this.props.updateDescription} />
 					);
 		}
-		if (!this.state.newLocation && this.state.show!=="about")
+		if (!this.state.newLocation && showAddButton)
 		{
 			if (this.state.detailed) {
 				var txt=`${helpers.round(this.props.geo.lat,3)},
@@ -110,6 +125,9 @@ export default class App extends Component {
 						<nav className="mdl-navigation">
 								<a className="mdl-navigation__link" href="#" onClick={this.showPage.bind(this, "about")}>
 									<i className="material-icons">info_outline</i>About
+								</a>
+								<a className="mdl-navigation__link" href="#" onClick={this.showPage.bind(this, "demo")}>
+									<i className="material-icons">explore</i>Demo
 								</a>
 								<a className="mdl-navigation__link" href="#">
 								<i className="material-icons">bug_report</i>Detailed
