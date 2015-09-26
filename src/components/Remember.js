@@ -47,6 +47,7 @@ export default class Remember extends Component {
 				if (e.alpha != null) {
 					let {geo} = this.state;
 					geo.orientation = Math.floor(e.alpha);
+					this.setState({geo})
 				}
 			}, false);
 		} else {
