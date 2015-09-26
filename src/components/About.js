@@ -1,6 +1,6 @@
 import React from "react";
 
-export default ({ok}) => (
+export default ({ok, version}) => (
 	<section className="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
 		<div className="mdl-card mdl-shadow--2dp"
 			style={{
@@ -14,7 +14,7 @@ export default ({ok}) => (
 				<h2 className="mdl-card__title-text">Remember</h2>
 			</div>
 			<div className="mdl-card__supporting-text">
-				<h6>Version 1.0</h6>
+				<h6>Version {version}</h6>
 				<a href="https://github.com/paulhoughton/remember">Github</a>
 			</div>
 			<div className="mdl-card__actions mdl-card--border">
