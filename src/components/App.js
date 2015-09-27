@@ -28,7 +28,6 @@ export default class App extends Component {
 	}
 	toggleDetail() {
 		this.setState({detailed:!this.state.detailed});
-		this.render();
 	}
 	showPage(page){
 		this.setState({show:page});
@@ -80,12 +79,22 @@ export default class App extends Component {
 		}
 		if (!this.state.newLocation && showAddButton)
 		{
-			if (this.state.detailed) {
-				var txt=`${helpers.round(this.props.geo.lat,3)},
-					${helpers.round(this.props.geo.lon,3)}
-					(${this.props.geo.orientation||0}°)`;
+			if (!this.props.geo.lat) {
+				button=<AddButton additionalText={"Searching for location..."} icon={"error"} />
 			}
-			button=<AddButton add={this.showNewItem.bind(this,true)} additionalText={txt} geo={this.props.geo} />
+			else
+			{
+				if (this.state.detailed) {
+					var txt=`${helpers.round(this.props.geo.lat,3)},
+						${helpers.round(this.props.geo.lon,3)}
+						(${this.props.geo.orientation||0}°)`;
+				}
+
+				button=<AddButton
+							add={this.showNewItem.bind(this,true)}
+							additionalText={txt}
+							geo={this.props.geo} />
+			}
 		}
 
 		let warnings=[];
