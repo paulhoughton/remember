@@ -3,8 +3,8 @@ import mdl from "exports?componentHandler!material-design-lite/material";
 import About from "./About";
 import AddButton from "./AddButton";
 import Table from "./Table";
-import helpers from "../helpers";
-import {VERSION, DEMO_DATA} from "../constants";
+import {round} from "../helpers";
+import {VERSION, DEMO_DATA, DP_DETAILED} from "../constants";
 
 export default class App extends Component {
 
@@ -85,8 +85,8 @@ export default class App extends Component {
 			else
 			{
 				if (this.state.detailed) {
-					var txt=`${helpers.round(this.props.geo.lat,3)},
-						${helpers.round(this.props.geo.lon,3)}
+					var txt=`${round(this.props.geo.lat, DP_DETAILED)},
+						${round(this.props.geo.lon, DP_DETAILED)}
 						(${this.props.geo.orientation||0}°)`;
 				}
 

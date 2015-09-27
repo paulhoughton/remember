@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import TableRow from "./TableRow";
-import helpers from "../helpers";
+import {getDistanceFromLatLonInKm} from "../helpers";
 
 export default class Table extends Component {
 
@@ -21,22 +21,20 @@ export default class Table extends Component {
 		if (this.props.geo.lat){
 			rows=this.props.data.map(([lat, lon, desc], i) => {
 
-				let dist=helpers.getDistanceFromLatLonInKm(lat,lon,this.props.geo.lat,this.props.geo.lon);
+				let dist=getDistanceFromLatLonInKm(lat, lon, this.props.geo.lat, this.props.geo.lon);
 
 				distByRow.push(dist);
 
 				return (<TableRow
+					{...this.props}
 					confirm={this.props.addLocation}
 					deleteRow={this.props.deleteLocation.bind(this, i)}
 					desc={desc}
-					detailed={this.props.detailed}
 					dist={dist}
-					geo={this.props.geo}
 					key={i}
 					lat={lat}
 					lon={lon}
-					row={i}
-					updateDescription={this.props.updateDescription} />);
+					row={i}/>);
 			});
 
 			rows.sort((a,b)=>distByRow[a.key]>distByRow[b.key]);

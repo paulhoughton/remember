@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import EditableCell from "./EditableCell";
-import helpers from "../helpers";
+import {getDegrees, round} from "../helpers";
+import {DP, DP_DETAILED, PROXIMITY} from "../constants";
 
 export default class TableRow extends Component {
 
@@ -28,14 +29,14 @@ export default class TableRow extends Component {
 				</tr>);
 		}
 
-		let deg=helpers.getDegrees(this.props.geo.lat,
+		let deg=getDegrees(this.props.geo.lat,
 									this.props.geo.lon,
 									this.props.lat,
 									this.props.lon);
 
 		let orient=360-(720-(this.props.geo.orientation||0)-deg)%360;
 
-		let icon = this.props.dist<0.02?
+		let icon = this.props.dist<PROXIMITY?
 					<i className="material-icons">star</i>:
 					<i className="material-icons" style={{transform:`rotate(${Math.floor(orient)}deg)`}}>navigation</i>;
 
@@ -46,7 +47,7 @@ export default class TableRow extends Component {
 					row={this.props.row}
 					value={this.props.desc}/>
 				<td style={{textAlign: "center"}}>{icon}</td>
-				<td>{helpers.round(this.props.dist, this.props.detailed?3:1)}</td>
+				<td>{round(this.props.dist, this.props.detailed?DP_DETAILED:DP)}</td>
 			</tr>
 		);
 	}

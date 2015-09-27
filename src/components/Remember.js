@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import App from './App.js';
-import helpers from '../helpers.js';
+import {round} from '../helpers.js';
 
 export default class Remember extends Component {
 	constructor(props) {
@@ -63,8 +63,8 @@ export default class Remember extends Component {
 	addLocation(desc, lat, lon) {
 		if (desc !== '') {
 			this.setState({data:this.state.data.concat([[
-						helpers.round(this.state.geo.lat, 4),
-						helpers.round(this.state.geo.lon, 4),
+						round(this.state.geo.lat, 4),
+						round(this.state.geo.lon, 4),
 						desc
 					]])
 			})
