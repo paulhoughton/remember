@@ -1,41 +1,20 @@
-import test from "tape";
-import helpers from "../src/helpers.js";
+import test from 'ava';
 
-test('getDistanceFromLatLonInKm', function (assert) {
-	const expected = 5569;
-	const actual = helpers.getDistanceFromLatLonInKm(51.5072,-0.1275,40.7033,-73.9797);
+import * as geo from '../src/helpers/geo';
 
-	assert.equal(Math.floor(actual), expected,
-		'should calculate distances in km');
+test('calculate distances', t => {
+  const expected = 5569;
+  const actual = geo.getDistanceFromLatLonInKm(51.5072, -0.1275, 40.7033, -73.9797);
 
-	assert.end();
+  t.is(Math.floor(actual), expected, 'should calculate distances in km');
 });
 
-test('rounding', function (assert) {
-  let actual = helpers.round(1.2345);
+test('degrees', t => {
+  const actual = geo.getDegrees(51.5072, -0.1275, 51.51385, -0.09835);
 
-  assert.equal(actual, 1.2,
-    'should default to 1dp');
+  t.is(Math.floor(actual), 69, 'should calculate degrees');
 
-  actual = helpers.round(1.2345,2);
+  const actual1 = geo.getDegrees(51.49948, -0.12481, 51.50136, -0.14189);
 
-  assert.equal(actual, 1.23,
-    'should allow overriding of dp');
-
-  assert.end();
+  t.is(Math.floor(actual1), 280, 'should calculate degrees');
 });
-
-test('degrees', function (assert) {
-	const actual = helpers.getDegrees(51.5072,-0.1275,51.51385,-0.09835);
-
-	assert.equal(Math.floor(actual), 69,
-		"should calculate degrees");
-
-	const actual1 = helpers.getDegrees(51.49948, -0.12481, 51.50136, -0.14189);
-
-	assert.equal(Math.floor(actual1), 280,
-		"should calculate degrees");
-
-	assert.end();
-});
-

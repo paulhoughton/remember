@@ -1,10 +1,12 @@
-export const VERSION = "1.0.1";
+export const VERSION = '2.0';
+
 export const DEMO_DATA = [
-		[40.689,-74.045,"Statue of Liberty"],
-		[-41.3,174.79,"Mount Victoria"],
-		[51.475,0.00,"Greenwich Meridian"],
-		[33.805,18.37,"Robben Island"]
-	];
-export const PROXIMITY = 0.02;
-export const DP = 1;
-export const DP_DETAILED = 3;
+    { latitude: 40.6893, longitude: -74.0467, desc: 'Statue of Liberty' },
+    { latitude: -41.2988, longitude: 174.7798, desc: 'Mount Victoria' },
+    { latitude: 51.478, longitude: 0.00, desc: 'Greenwich Meridian' },
+    { latitude: -33.7998, longitude: 18.3701, desc: 'Robben Island' }
+];
+
+export const LOCAL_STORAGE_KEY = 'rememberV2';
+
+export const KM2MILES = 0.621371;

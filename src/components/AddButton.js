@@ -1,13 +1,26 @@
 import React from 'react';
+import { FABButton, Spinner, Icon } from 'react-mdl';
 
-export default ({add, additionalText, icon="add"}) => (
-	<div className="remember-add-button">
-		<span>{additionalText}</span>
-		<button
-			className="mdl-button mdl-js-button mdl-button--fab mdl-button--colored bottom-right"
-			onClick={add}
-			style={{marginLeft: "10px"}}>
-				<i className="material-icons">{icon}</i>
-		</button>
-	</div>
-)
+const style = {
+  right: '15px'
+};
+
+const AddButton = ({ onClick, loading, icon = 'add' }) => (
+  loading ? <Spinner className="fixed-bottom" style={ style } /> :
+    <FABButton
+      colored
+      raised
+      className="fixed-bottom"
+      style={style}
+      onClick={onClick}>
+      <Icon name={icon} />
+    </FABButton>
+);
+
+AddButton.propTypes = {
+  onClick: React.PropTypes.func,
+  loading: React.PropTypes.bool,
+  icon: React.PropTypes.string
+};
+
+export default AddButton;
