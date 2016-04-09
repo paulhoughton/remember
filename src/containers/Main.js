@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { calcDistances } from '../helpers/location';
 
 import LocationList from '../components/LocationList';
 import AddButton from '../components/AddButton';
 
-class Main extends React.Component {
+class Main extends Component {
 
   componentWillMount() {
     navigator.geolocation.watchPosition(position => {
@@ -62,21 +62,19 @@ class Main extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.main,
-    settings: state.settings,
-    locations: state.main.locations.map(calcDistances(state.main.geo.latitude, state.main.geo.longitude))
-  };
-};
+const mapStateToProps = (state) => ({
+  ...state.main,
+  settings: state.settings,
+  locations: state.main.locations.map(calcDistances(state.main.geo.latitude, state.main.geo.longitude))
+});
 
 Main.propTypes = {
-  dialog: React.PropTypes.object,
-  route: React.PropTypes.object,
-  dispatch: React.PropTypes.func,
-  geo: React.PropTypes.object,
-  settings: React.PropTypes.object,
-  current: React.PropTypes.object
+  dialog: PropTypes.object,
+  route: PropTypes.object,
+  dispatch: PropTypes.func,
+  geo: PropTypes.object,
+  settings: PropTypes.object,
+  current: PropTypes.object
 };
 
 export default connect(mapStateToProps)(Main);

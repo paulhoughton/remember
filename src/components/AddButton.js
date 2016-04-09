@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FABButton, Spinner, Icon } from 'react-mdl';
 
 const style = {
@@ -18,9 +18,9 @@ const AddButton = ({ onClick, loading, icon = 'add' }) => (
 );
 
 AddButton.propTypes = {
-  onClick: React.PropTypes.func,
-  loading: React.PropTypes.bool,
-  icon: React.PropTypes.string
+  onClick: PropTypes.func,
+  loading: PropTypes.bool,
+  icon: PropTypes.string
 };
 
 export default AddButton;

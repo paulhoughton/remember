@@ -1,14 +1,14 @@
 import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
 
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Navigation, Layout, Drawer, Content, Header, Switch } from 'react-mdl';
 
 import Warnings from './Warnings';
 
-class App extends React.Component {
+class App extends Component {
   render() {
     const { km, detailed, children, dispatch } = this.props;
     return (
@@ -48,16 +48,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  dispatch: React.PropTypes.func,
-  children: React.PropTypes.object,
-  km: React.PropTypes.bool,
-  detailed: React.PropTypes.bool
+  dispatch: PropTypes.func,
+  children: PropTypes.object,
+  km: PropTypes.bool,
+  detailed: PropTypes.bool
 };
 
-const mapStateToProps = (state) => {
-  return {
-    ...state.settings
-  };
-};
+const mapStateToProps = (state) => ({ ...state.settings });
 
 export default connect(mapStateToProps)(App);

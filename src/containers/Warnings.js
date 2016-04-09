@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Tooltip, Icon } from 'react-mdl';
 import { connect } from 'react-redux';
 
-class Warnings extends React.Component {
+class Warnings extends Component {
   render() {
     const { orientation, accuracy, lastUpdate } = this.props;
     const warning = ({ message, icon, color = 'white' }) => (
@@ -37,17 +37,13 @@ class Warnings extends React.Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    ...state.main.geo
-  };
-};
+const mapStateToProps = (state) => ({...state.main.geo});
 
 Warnings.propTypes = {
-  orientation: React.PropTypes.number,
-  accuracy: React.PropTypes.number,
-  lastUpdate: React.PropTypes.number,
-  dispatch: React.PropTypes.func
+  orientation: PropTypes.number,
+  accuracy: PropTypes.number,
+  lastUpdate: PropTypes.number,
+  dispatch: PropTypes.func
 };
 
 export default connect(mapStateToProps)(Warnings);

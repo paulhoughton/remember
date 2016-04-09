@@ -1,6 +1,0 @@
-node_modules/
-.eslintrc
-jsconfig.json
-webpack.config.prod.js
-dist/
-.vscode/

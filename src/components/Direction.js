@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { getDegrees } from '../helpers/geo';
 import { Icon } from 'react-mdl';
 
@@ -20,10 +20,10 @@ const Direction = ({ geo, longitude, latitude, dist }) => {
 };
 
 Direction.propTypes = {
-  geo: React.PropTypes.object,
-  longitude: React.PropTypes.number,
-  latitude: React.PropTypes.number,
-  dist: React.PropTypes.number
+  geo: PropTypes.object,
+  longitude: PropTypes.number,
+  latitude: PropTypes.number,
+  dist: PropTypes.number
 };
 
 export default Direction;

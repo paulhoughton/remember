@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Textfield, ListItem, ListItemContent, ListItemAction } from 'react-mdl';
 
 const LocationItem = ({ subtitle, textField, content, onClick, children }) => (
@@ -8,6 +8,7 @@ const LocationItem = ({ subtitle, textField, content, onClick, children }) => (
     <ListItemContent subtitle={subtitle}>
       {textField &&
         <Textfield
+          autoFocus
           label="Location"
           value={textField.value}
           onKeyDown={e => { if (e.key === 'Enter') textField.onSubmit(); } }
@@ -23,10 +24,10 @@ const LocationItem = ({ subtitle, textField, content, onClick, children }) => (
 );
 
 LocationItem.propTypes = {
-  subtitle: React.PropTypes.string,
-  textField: React.PropTypes.object,
-  content: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  children: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.array])
+  subtitle: PropTypes.string,
+  textField: PropTypes.object,
+  content: PropTypes.string,
+  onClick: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
 };
 export default LocationItem;
