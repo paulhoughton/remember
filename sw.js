@@ -3,8 +3,9 @@ this.addEventListener('install', function(event) {
     caches.open('remember-v2').then(function(cache) {
       return cache.addAll([
         '/',
-        '/index.html',
-        '/bundle.js'
+        '/app.js',
+        '/vendor.js',
+        '/style.css'
       ]);
     })
   );
