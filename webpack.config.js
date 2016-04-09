@@ -1,16 +1,28 @@
 var path = require('path');
+var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/index'],
+  entry: {
+    app: './src/index.js',
+    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-mdl', 'react-mdl/extra/material']
+  },
   output: {
-    filename: 'dist/bundle.js'
+    path: path.join(__dirname, 'dist/'),
+    filename: 'app.js'
   },
   plugins: [
     new CopyWebpackPlugin([
-        { from: 'index.html', to: 'dist/' },
-        { from: 'sw.js', to: 'dist/' }
-    ])
+      { from: 'index.html' },
+      { from: 'sw.js' }
+    ]),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.js'
+    }),
+    new ExtractTextPlugin('style.css')
   ],
   module: {
     loaders: [
@@ -22,11 +34,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.css/, 
-        loader: 'style-loader!css-loader' },
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract('style', 'css')
+      },
       {
         test: /\.woff$/,
-        loader: 'url?limit=100000'
+        loader: 'url'
       }
     ]
   }
