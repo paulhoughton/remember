@@ -6,9 +6,8 @@ import LocationItem from './LocationItem';
 import Direction from './Direction';
 
 const LocationList = ({ geo, locations, selected, current, demo, settings, dispatch }) => {
-  if (demo) {
-    locations = DEMO_DATA.map(calcDistances(geo.latitude, geo.longitude));
-  }
+  const locationsToDisplay = !demo ? locations : DEMO_DATA.map(calcDistances(geo.latitude, geo.longitude));
+
   return (
     <List>
       {(current.editing && !demo) && (
@@ -24,7 +23,7 @@ const LocationList = ({ geo, locations, selected, current, demo, settings, dispa
         </LocationItem>)
       }
 
-    {locations.sort((a, b) => a.dist > b.dist)
+    {locationsToDisplay.sort((a, b) => a.dist > b.dist)
     .map((location, i) => {
       if (selected.index === location.index) {
         return (

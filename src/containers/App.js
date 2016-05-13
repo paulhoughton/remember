@@ -54,6 +54,6 @@ App.propTypes = {
   detailed: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({ ...state.settings });
+const mapStateToProps = ({ settings }) => ({ ...settings });
 
 export default connect(mapStateToProps)(App);

@@ -5,9 +5,7 @@ import { Icon } from 'react-mdl';
 const Direction = ({ geo, longitude, latitude, dist }) => {
   if (!geo || !geo.latitude) return <div/>;
 
-  if (dist < 0.02) {
-    return (<Icon name="star" />);
-  }
+  if (dist < 0.02) return <Icon name="star" />;
 
   const deg = getDegrees(geo.latitude,
                         geo.longitude,

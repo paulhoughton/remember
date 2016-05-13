@@ -37,7 +37,7 @@ class Warnings extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({...state.main.geo});
+const mapStateToProps = ({ main }) => ({ ...main.geo });
 
 Warnings.propTypes = {
   orientation: PropTypes.number,

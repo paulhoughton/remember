@@ -19,7 +19,7 @@ class Main extends Component {
         }
       });
     },
-    (err) => console.log('Unable to find position', err),
+    (err) => alert('Unable to find position - ' + err.message),
       {
         enableHighAccuracy: true,
         timeout: 15000
@@ -62,10 +62,10 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  ...state.main,
-  settings: state.settings,
-  locations: state.main.locations.map(calcDistances(state.main.geo.latitude, state.main.geo.longitude))
+const mapStateToProps = ({ main, settings }) => ({
+  ...main,
+  settings: settings,
+  locations: main.locations.map(calcDistances(main.geo.latitude, main.geo.longitude))
 });
 
 Main.propTypes = {

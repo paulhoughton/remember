@@ -1,7 +1,7 @@
 import { getDistanceFromLatLonInKm } from './geo';
 
-export const calcDistances = (latitude, longitude) => (loc, i) => ({
+export const calcDistances = (latitude, longitude) => (loc, index) => ({
   ...loc,
-  index: i,
+  index,
   dist: getDistanceFromLatLonInKm(loc.latitude, loc.longitude, latitude, longitude)
 });
