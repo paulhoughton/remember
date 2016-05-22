@@ -64,7 +64,7 @@ class Main extends Component {
 
 const mapStateToProps = ({ main, settings }) => ({
   ...main,
-  settings: settings,
+  settings,
   locations: main.locations.map(calcDistances(main.geo.latitude, main.geo.longitude))
 });
 
