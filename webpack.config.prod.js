@@ -16,8 +16,8 @@ module.exports = {
     loaders: [
       {
         loader: 'babel-loader',
-        include: [path.resolve(__dirname, 'src')],
-        test: /\.jsx?$/
+        exclude: /node_modules/,
+        test: /\.js$/
       },
       { test: /\.css/,
         loader: ExtractTextPlugin.extract('style', 'css')
