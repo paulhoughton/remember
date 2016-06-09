@@ -1,4 +1,5 @@
 {
+  "short_name": "Remember",
   "name": "Remember",
   "icons": [
     {
@@ -22,5 +23,6 @@
       "type": "image/png"
     }
   ],
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "index.html"
 }
