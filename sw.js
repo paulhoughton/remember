@@ -2,11 +2,11 @@ this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('remember-v2').then(function(cache) {
       return cache.addAll([
-        '/',
-        '/index.html',
-        '/app.js',
-        '/vendor.js',
-        '/style.css'
+        './',
+        './index.html',
+        './app.js',
+        './vendor.js',
+        './style.css'
       ]);
     })
   );
