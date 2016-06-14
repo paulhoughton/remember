@@ -4,11 +4,13 @@ import 'react-mdl/extra/material.css';
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { setSetting } from '../reducers/settings';
+
 import { Navigation, Layout, Drawer, Content, Header, Switch } from 'react-mdl';
 
 import Warnings from './Warnings';
 
-const App = ({ km, detailed, children, dispatch }) => (
+const App = ({ km, detailed, children, setting }) => (
   <div style={{ height: '100vh', position: 'relative' }}>
     <Layout fixedHeader>
       <Header title={
@@ -24,14 +26,14 @@ const App = ({ km, detailed, children, dispatch }) => (
           <div className="mdl-navigation__link">
             <Switch ripple
               checked={km}
-              onChange={(e) => dispatch({ type: 'SETTINGS', field: 'km', value: e.currentTarget.checked }) }>
+              onChange={(e) => setting('km', e.currentTarget.checked) }>
                 Km
             </Switch>
           </div>
           <div className="mdl-navigation__link">
             <Switch ripple
               checked={detailed}
-              onChange={(e) => dispatch({ type: 'SETTINGS', field: 'detailed', value: e.currentTarget.checked }) }>
+              onChange={(e) => setting('detailed', e.currentTarget.checked) }>
                 Detailed
             </Switch>
           </div>
@@ -43,12 +45,10 @@ const App = ({ km, detailed, children, dispatch }) => (
 );
 
 App.propTypes = {
-  dispatch: PropTypes.func,
+  setting: PropTypes.func,
   children: PropTypes.object,
   km: PropTypes.bool,
   detailed: PropTypes.bool
 };
 
-const mapStateToProps = ({ settings }) => ({ ...settings });
-
-export default connect(mapStateToProps)(App);
+export default connect(({ settings }) => settings, { setting: setSetting })(App);

@@ -1,46 +1,24 @@
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { calcDistances } from '../helpers/location';
+
+import * as MainActions from '../reducers/main';
 
 import LocationList from '../components/LocationList';
 import AddButton from '../components/AddButton';
 
+import { geoListeners } from '../helpers/setup';
+
 class Main extends Component {
 
   componentWillMount() {
-    navigator.geolocation.watchPosition(position => {
-      this.props.dispatch({
-        type: 'UPDATE_GEO',
-        geo: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          lastUpdate: position.timestamp,
-          accuracy: Math.floor(position.coords.accuracy)
-        }
-      });
-    },
-    (err) => alert('Unable to find position - ' + err.message),
-      {
-        enableHighAccuracy: true,
-        timeout: 15000
-      }
-    );
-
-    window.addEventListener('deviceorientation', (event) => {
-      if (event.alpha !== null && Math.floor(event.alpha) !== this.props.geo.orientation) {
-        this.props.dispatch({
-          type: 'UPDATE_GEO',
-          geo: {
-            orientation: Math.floor(event.alpha)
-          }
-        });
-      }
-    }, true);
+    geoListeners(this.props.actions.updateGeo);
   }
 
   render() {
-    const { geo, current, settings, dispatch } = this.props;
-    const { latitude, longitude, orientation } = geo;
+    const { actions, current, settings, geo: { latitude, longitude, orientation } } = this.props;
+
     return (<div>
         {settings.detailed && latitude &&
             <div className="fixed-bottom"
@@ -52,11 +30,7 @@ class Main extends Component {
             {(!current.editing && !this.props.route.demo) &&
                 (<AddButton
                     loading={!latitude}
-                    onClick={() => {
-                      dispatch({
-                        type: 'SHOW_NEW_LOCATION', show: true
-                      });
-                    } }
+                    onClick={() => actions.showNewLocation(true)}
                 />)}
         </div>);
   }
@@ -71,10 +45,14 @@ const mapStateToProps = ({ main, settings }) => ({
 Main.propTypes = {
   dialog: PropTypes.object,
   route: PropTypes.object,
-  dispatch: PropTypes.func,
   geo: PropTypes.object,
   settings: PropTypes.object,
-  current: PropTypes.object
+  current: PropTypes.object,
+  actions: PropTypes.object
 };
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({ ...MainActions }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

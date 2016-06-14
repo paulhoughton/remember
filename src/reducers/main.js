@@ -86,3 +86,12 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+export const updateGeo = (geo) => ({ type: 'UPDATE_GEO', geo });
+export const showNewLocation = (show) => ({ type: 'SHOW_NEW_LOCATION', show });
+export const addCurrent = () => ({ type: 'ADD_CURRENT' });
+export const currentLocationDesc = (desc) => ({ type: 'CURRENT_LOCATION_DESC', desc });
+export const confirmSelected = () => ({ type: 'CONFIRM_SELECTED' });
+export const deleteSelected = () => ({ type: 'DELETE_SELECTED' });
+export const setSelectedText = (desc) => ({ type: 'SET_SELECTED_TEXT', desc });
+export const setSelected = (id) => ({ type: 'SET_SELECTED', id });

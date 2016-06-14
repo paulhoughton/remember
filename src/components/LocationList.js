@@ -5,7 +5,7 @@ import { DEMO_DATA, KM2MILES } from '../constants';
 import LocationItem from './LocationItem';
 import Direction from './Direction';
 
-const LocationList = ({ geo, locations, selected, current, demo, settings, dispatch }) => {
+const LocationList = ({ geo, locations, selected, current, demo, settings, actions }) => {
   const locationsToDisplay = !demo ? locations : DEMO_DATA.map(calcDistances(geo.latitude, geo.longitude));
 
   return (
@@ -15,11 +15,11 @@ const LocationList = ({ geo, locations, selected, current, demo, settings, dispa
           key={0}
           textField = {{
             value: current.description,
-            onSubmit: () => dispatch({ type: 'ADD_CURRENT' }),
-            onChange: e => dispatch({ type: 'CURRENT_LOCATION_DESC', desc: e })
+            onSubmit: () => actions.addCurrent(),
+            onChange: e => actions.currentLocationDesc(e)
           }} >
-            <IconButton name="add" onClick={() => dispatch({ type: 'ADD_CURRENT' })}/>
-            <IconButton name="cancel" onClick={() => dispatch({ type: 'SHOW_NEW_LOCATION', show: false })}/>
+            <IconButton name="add" onClick={actions.addCurrent}/>
+            <IconButton name="cancel" onClick={() => actions.showNewLocation(false) }/>
         </LocationItem>)
       }
 
@@ -30,11 +30,11 @@ const LocationList = ({ geo, locations, selected, current, demo, settings, dispa
           <LocationItem
             key={i}
             textField ={{ value: selected.text,
-            onSubmit: () => dispatch({ type: 'CONFIRM_SELECTED' }),
-            onChange: (e) => dispatch({ type: 'SET_SELECTED_TEXT', desc: e }) }}>
-              <IconButton name="check" onClick={() => dispatch({ type: 'CONFIRM_SELECTED' })}/>
-              <IconButton name="delete" onClick={() => dispatch({ type: 'DELETE_SELECTED' })}/>
-              <IconButton name="cancel" onClick={() => dispatch({ type: 'SET_SELECTED', id: null })}/>
+            onSubmit: () => actions.confirmSelected(),
+            onChange: (e) => actions.setSelectedText(e) }}>
+              <IconButton name="check" onClick={actions.confirmSelected}/>
+              <IconButton name="delete" onClick={actions.deleteSelected}/>
+              <IconButton name="cancel" onClick={() => actions.setSelected(null)}/>
           </LocationItem>);
       }
       return (
@@ -42,14 +42,13 @@ const LocationList = ({ geo, locations, selected, current, demo, settings, dispa
           key={i}
           subtitle = { (settings.detailed ? `(${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}) ` : '') +
             (isNaN(location.dist) ? '' : (location.dist * (settings.km ? 1 : KM2MILES)).toFixed(1)) }
-          onClick={() => {!demo && dispatch({ type: 'SET_SELECTED', id: location.index });}}
+          onClick={() => {!demo && actions.setSelected(location.index);}}
           content = {location.desc}>
             <Direction geo={geo} {...location} />
         </LocationItem>);
     })
   }
 </List>);};
-
 
 LocationList.propTypes = {
   geo: PropTypes.object,
@@ -58,7 +57,7 @@ LocationList.propTypes = {
   current: PropTypes.object,
   demo: PropTypes.bool,
   settings: PropTypes.object,
-  dispatch: PropTypes.func
+  actions: PropTypes.object
 };
 
 export default LocationList;
