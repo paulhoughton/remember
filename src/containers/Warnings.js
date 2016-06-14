@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { Tooltip, Icon } from 'react-mdl';
 import { connect } from 'react-redux';
 
@@ -33,14 +33,11 @@ const Warnings = ({ orientation, accuracy, lastUpdate }) => {
   return <span style={{ paddingLeft: '15px' }}>{warnings}</span>;
 };
 
-const mapStateToProps = ({ main }) => ({ ...main.geo });
-
 Warnings.propTypes = {
   orientation: PropTypes.number,
   accuracy: PropTypes.number,
-  lastUpdate: PropTypes.number,
-  dispatch: PropTypes.func
+  lastUpdate: PropTypes.number
 };
 
-export default connect(mapStateToProps)(Warnings);
+export default connect(({ main }) => main.geo)(Warnings);
 
