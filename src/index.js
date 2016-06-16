@@ -31,7 +31,7 @@ render(
       <Route path="/" component={ App }>
         <IndexRoute component={ Main }/>
         <Route path="about" component={ About }/>
-        <Route path="demo" component={ Main } demo="true"/>
+        <Route path="demo" component={ Main } demo={ true }/>
       </Route>
     </Router>
   </Provider>,
