@@ -15,9 +15,10 @@ export function geoListeners(callback) {
   );
 
   window.addEventListener('deviceorientation', (event) => {
+    if (event.alpha === null) return;
     const alpha = Math.floor(event.alpha);
     if (alpha !== prev) {
-      callback({ orientation: Math.floor(alpha) });
+      callback({ orientation: alpha });
       prev = alpha;
     }
   }, true);

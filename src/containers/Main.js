@@ -42,7 +42,7 @@ Main.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ ...MainActions }, dispatch)
+  actions: bindActionCreators(MainActions, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
