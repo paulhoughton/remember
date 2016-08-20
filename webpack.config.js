@@ -14,8 +14,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'index.html' },
-      { from: 'sw.js' }
+      { from: 'index.html' }
     ]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -32,8 +31,10 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+        test: /\.css$/, loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader'
+        })
       },
       {
         test: /\.woff$/,

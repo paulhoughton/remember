@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var Purify = require('purifycss-webpack-plugin');
 
@@ -19,8 +20,11 @@ module.exports = {
         exclude: /node_modules/,
         test: /\.js$/
       },
-      { test: /\.css/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+      {
+        test: /\.css$/, loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader'
+        })
       },
       { test: /\.woff$/,
         loader: 'url'
@@ -28,6 +32,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyWebpackPlugin([
+      { from: 'index.html' },
+      { from: 'sw.js' }
+    ]),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity,
