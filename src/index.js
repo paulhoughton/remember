@@ -10,7 +10,7 @@ import App from './containers/App';
 import persistState from './middleware/persistState';
 import './style.css';
 
-if (navigator.serviceWorker) {
+if (process.env.NODE_ENV === 'production' && navigator.serviceWorker) {
   navigator.serviceWorker.register('./sw.js')
   .then(() => console.log('Service worker registered'))
   .catch(err => console.log(`Service worker registration failed! ${err}`));
