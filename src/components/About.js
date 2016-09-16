@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardTitle, CardText, CardActions, Button } from 'react-mdl';
-import { hashHistory } from 'react-router';
+import { Link } from 'react-router';
 import { VERSION } from '../constants';
 
 export default () => (
@@ -11,7 +11,7 @@ export default () => (
       <a href="https://github.com/paulhoughton/remember/">Github</a>
     </CardText>
     <CardActions border>
-      <Button colored onClick={() => hashHistory.push('/') } >OK</Button>
+      <Link to="/"><Button colored>OK</Button></Link>
     </CardActions>
   </Card>
 );

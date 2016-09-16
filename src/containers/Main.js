@@ -9,7 +9,7 @@ import LocationList from '../components/LocationList';
 import AddButton from '../components/AddButton';
 
 const Main = (props) => {
-  const { actions, current, settings, route, geo: { latitude, longitude, orientation } } = props;
+  const { actions, current, settings, geo: { latitude, longitude, orientation } } = props;
   return (
     <div>
       {settings.detailed && latitude &&
@@ -18,14 +18,15 @@ const Main = (props) => {
           ({latitude.toFixed(4) }, {longitude.toFixed(4) }) {orientation}°
         </div>
     }
-    <LocationList {...props} demo={route.demo} />
-    {(!current.editing && !route.demo) &&
+    <LocationList {...props} />
+    {(!current.editing) &&
         (<AddButton
             loading={!latitude}
             onClick={() => actions.showNewLocation(true)}
         />)}
 </div>);
-}
+};
+
 const mapStateToProps = ({ main, settings }) => ({
   ...main,
   settings,

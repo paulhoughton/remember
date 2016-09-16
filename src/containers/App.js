@@ -2,24 +2,37 @@ import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
 
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { HashRouter, Match, Link } from 'react-router';
 import { connect } from 'react-redux';
 import { updateGeo } from '../reducers/main';
 import { setSetting } from '../reducers/settings';
 import { geoListeners } from '../helpers/setup';
 
+import Main from './Main';
+import About from '../components/About';
+
 import { Navigation, Layout, Drawer, Content, Header, Switch } from 'react-mdl';
 
 import Warnings from './Warnings';
+
+class MatchAndHideDrawer extends Component {
+  componentWillUpdate() {
+    document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
+    document.querySelector('.mdl-layout__drawer').classList.remove('is-visible');
+  }
+  render() {
+    return <Match {...this.props} />;
+  }
+}
 
 class App extends Component {
   componentWillMount() {
     geoListeners(this.props.updateGeo);
   }
   render() {
-    const { km, detailed, children, setting } = this.props;
+    const { km, detailed, setting } = this.props;
     return (
-      <div style={{ height: '100vh', position: 'relative' }}>
+      <HashRouter class="main">
         <Layout fixedHeader>
           <Header title={
             <span style={{ color: 'white' }}>
@@ -47,9 +60,13 @@ class App extends Component {
               </div>
             </Navigation>
           </Drawer>
-          <Content>{children}</Content>
+          <Content>
+            <MatchAndHideDrawer exactly pattern="/" component={Main} />
+            <MatchAndHideDrawer pattern="/about" component={About} />
+            <MatchAndHideDrawer pattern="/demo" component={() => <Main demo={true} />} />
+          </Content>
         </Layout>
-      </div>);
+    </HashRouter>);
   }
 }
 App.propTypes = {
