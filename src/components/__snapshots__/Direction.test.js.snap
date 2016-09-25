@@ -1,0 +1,20 @@
+exports[`test Direction test 1`] = `
+<i
+  className="material-icons"
+  style={
+    Object {
+      "transform": "rotate(173deg)"
+    }
+  }>
+  navigation
+</i>
+`;
+
+exports[`test Pre population test 1`] = `<div />`;
+
+exports[`test Proximity test 1`] = `
+<i
+  className="material-icons">
+  star
+</i>
+`;

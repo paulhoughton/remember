@@ -5,7 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --config webpack.config.prod.js",
-    "test": "ava"
+    "test": "jest"
   },
   "license": "MIT",
   "repository": {
@@ -16,6 +16,7 @@
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-core": "^6.14.0",
+    "babel-jest": "^15.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.13.0",
@@ -28,19 +29,21 @@
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "history": "^4.2.0",
+    "jest": "^15.1.1",
     "material-design-icons": "^3.0.1",
     "purifycss-webpack-plugin": "^2.0.3",
-    "react": "^15.3.1",
-    "react-addons-test-utils": "^15.3.1",
-    "react-dom": "^15.3.1",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
     "react-mdl": "^1.7.2",
     "react-redux": "^4.4.5",
-    "react-router": "^4.0.0-2",
+    "react-router": "^4.0.0-alpha.3",
+    "react-test-renderer": "^15.3.2",
     "redux": "^3.6.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.22",
-    "webpack-dev-server": "^2.1.0-beta.4"
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^2.1.0-beta.5"
   },
   "ava": {
     "files": [
