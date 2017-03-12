@@ -61,7 +61,7 @@ class App extends Component {
             </Navigation>
           </Drawer>
           <Content>
-            <RouteHideDrawer exactly path="/" component={Main} />
+            <RouteHideDrawer exact path="/" component={Main} />
             <RouteHideDrawer path="/about" component={About} />
             <RouteHideDrawer path="/demo" component={() => <Main demo={true} />} />
           </Content>
