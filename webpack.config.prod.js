@@ -2,12 +2,12 @@ var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var Purify = require('purifycss-webpack-plugin');
+var pkg = require('./package.json');
 
 module.exports = {
   entry: {
     app: './src/index.js',
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-mdl', 'react-mdl/extra/material']
+    vendor: Object.keys(pkg.dependencies).concat('./src/vendor')
   },
   output: {
     path: path.join(__dirname, './dist'),
@@ -16,18 +16,20 @@ module.exports = {
   module: {
     loaders: [
       {
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        test: /\.js$/
+        test: /\.js?$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
-        test: /\.css$/, loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader'
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       },
-      { test: /\.woff$/,
-        loader: 'url'
+      {
+        test: /\.woff$/,
+        use: 'url-loader'
       }
     ]
   },
@@ -52,15 +54,6 @@ module.exports = {
       sourceMap: false
     }),
     new ExtractTextPlugin('style.css'),
-    new Purify({
-      basePath: 'dist',
-      paths: [
-        'app.js',
-        'vendor.js',
-        'index.html'
-      ],
-      purifyOptions: { minify: true }
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })

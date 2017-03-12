@@ -2,7 +2,7 @@ import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
 
 import React, { Component, PropTypes } from 'react';
-import { HashRouter, Match, Link } from 'react-router';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateGeo } from '../reducers/main';
 import { setSetting } from '../reducers/settings';
@@ -15,15 +15,15 @@ import { Navigation, Layout, Drawer, Content, Header, Switch } from 'react-mdl';
 
 import Warnings from './Warnings';
 
-class MatchAndHideDrawer extends Component {
-  componentWillUpdate() {
-    document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
-    document.querySelector('.mdl-layout__drawer').classList.remove('is-visible');
-  }
-  render() {
-    return <Match {...this.props} />;
-  }
-}
+const RouteHideDrawer = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={() => {
+    if (document.querySelector('.mdl-layout__drawer')) {
+      document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
+      document.querySelector('.mdl-layout__drawer').classList.remove('is-visible');
+    }
+    return <Component {...rest} />;
+  }}/>
+);
 
 class App extends Component {
   componentWillMount() {
@@ -32,7 +32,7 @@ class App extends Component {
   render() {
     const { km, detailed, setting } = this.props;
     return (
-      <HashRouter class="main">
+      <Router class="main">
         <Layout fixedHeader>
           <Header title={
             <span style={{ color: 'white' }}>
@@ -61,12 +61,12 @@ class App extends Component {
             </Navigation>
           </Drawer>
           <Content>
-            <MatchAndHideDrawer exactly pattern="/" component={Main} />
-            <MatchAndHideDrawer pattern="/about" component={About} />
-            <MatchAndHideDrawer pattern="/demo" component={() => <Main demo={true} />} />
+            <RouteHideDrawer exactly path="/" component={Main} />
+            <RouteHideDrawer path="/about" component={About} />
+            <RouteHideDrawer path="/demo" component={() => <Main demo={true} />} />
           </Content>
         </Layout>
-    </HashRouter>);
+    </Router>);
   }
 }
 App.propTypes = {
