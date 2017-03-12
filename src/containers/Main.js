@@ -34,7 +34,7 @@ const mapStateToProps = ({ main, settings }) => ({
 });
 
 Main.propTypes = {
-  demo: PropTypes.boolean,
+  demo: PropTypes.bool,
   dialog: PropTypes.object,
   route: PropTypes.object,
   geo: PropTypes.object,
