@@ -1,7 +1,8 @@
 import 'react-mdl/extra/material';
 import 'react-mdl/extra/material.css';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateGeo } from '../reducers/main';

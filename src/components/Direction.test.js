@@ -1,8 +1,10 @@
 jest.mock('react-dom');
 import React from 'react';
 
-import renderer from 'react-test-renderer';
+import { createRenderer } from 'react-test-renderer/shallow';
 import Direction from './Direction';
+
+const shallowRenderer = createRenderer();
 
 test('Direction test', () => {
   const params = {
@@ -15,8 +17,8 @@ test('Direction test', () => {
     dist: 2.12345
   };
 
-  const component = renderer.create(<Direction {...params} />);
-  expect(component.toJSON()).toMatchSnapshot();
+  shallowRenderer.render(<Direction {...params} />);
+  expect(shallowRenderer.getRenderOutput()).toMatchSnapshot();
 });
 
 test('Proximity test', () => {
@@ -30,11 +32,11 @@ test('Proximity test', () => {
     dist: 0.019
   };
 
-  const component = renderer.create(<Direction {...params} />);
-  expect(component.toJSON()).toMatchSnapshot();
+  shallowRenderer.render(<Direction {...params} />);
+  expect(shallowRenderer.getRenderOutput()).toMatchSnapshot();
 });
 
 test('Pre population test', () => {
-  const component = renderer.create(<Direction/>);
-  expect(component.toJSON()).toMatchSnapshot();
+  shallowRenderer.render(<Direction/>);
+  expect(shallowRenderer.getRenderOutput()).toMatchSnapshot();
 });

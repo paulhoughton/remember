@@ -1,24 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Direction test 1`] = `
-<i
-  className="material-icons"
+<Icon
+  name="navigation"
   style={
     Object {
       "transform": "rotate(173deg)",
     }
   }
->
-  navigation
-</i>
+/>
 `;
 
 exports[`Pre population test 1`] = `<div />`;
 
 exports[`Proximity test 1`] = `
-<i
-  className="material-icons"
->
-  star
-</i>
+<Icon
+  name="star"
+/>
 `;

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Textfield, ListItem, ListItemContent, ListItemAction } from 'react-mdl';
 
 const LocationItem = ({ subtitle, textField, content, onClick, children }) => (

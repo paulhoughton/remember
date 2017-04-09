@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Tooltip, Icon } from 'react-mdl';
 import { connect } from 'react-redux';
 

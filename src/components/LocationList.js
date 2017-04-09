@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { IconButton, List } from 'react-mdl';
 import { calcDistances } from '../helpers/location';
 import { DEMO_DATA, KM2MILES } from '../constants';
